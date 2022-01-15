@@ -60,7 +60,7 @@ app.get("/getClasses", (req, res) => {
   });
 });
 
-//get country list
+///get country list
 app.get("/getCountries", (req, res) => {
   let sql = `SELECT * FROM countries`;
   db.all(sql, (err, row) => {
