@@ -4,6 +4,7 @@ const sqlite = require("sqlite3").verbose();
 const cors = require("cors");
 
 const app = express();
+
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 8000;
@@ -19,6 +20,7 @@ let db = new sqlite.Database(path.join(__dirname + '/db/rihal.db'), (err) => {
   if (err) {
     return console.error(err.message);
   }
+
   console.log("Connected to SQlite database.");
   app.listen(port, () => console.log(`app listening on port ${port}`));
 });
@@ -153,7 +155,7 @@ app.post("/editStudent/:id", (req, res) => {
     req.body.name,
     req.body.birthday,
   ];
-  let sql = `UPDATE students SET (class_id, country_id, name, date_of_birth) = (?, ?, ?, ?) WHERE student_id = ${id}`;
+  let sql = `UPDATE students SET (class_id, country_id, name, date_of_birth, updated_at) = (?, ?, ?, ?, ?) WHERE student_id = ${id}`;
   db.run(sql, params, (err) => {
     if (err) {
       res.status(500).json(err);
